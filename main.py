@@ -6,17 +6,11 @@ alphabet="1234567890"
 N = P*Q
 euler_function=(P-1)*(Q-1)
 
-def encrypt(text):
-    c_list = []
+def en_de_crypt(text, exp):
+    list = []
     for i in range(text.__len__()):
-        c_list.append(str((int(text[i]) ** e) % N))
-    return c_list
-
-def decrypt(enc_text):
-    m_list = []
-    for i in range(enc_text.__len__()):
-        m_list.append(str((int(enc_text[i]) ** d) % N))
-    return m_list
+        list.append(str((int(text[i]) ** exp) % N))
+    return list
 
 def check_txt(org_txt, dec_txt):
     if org_txt == dec_txt:
@@ -25,16 +19,16 @@ def check_txt(org_txt, dec_txt):
         print('Bad Code\n')
 
 print(alphabet)
-print(" ".join(encrypt(alphabet)))
-res = "".join(decrypt(encrypt(alphabet)))
+print(" ".join(en_de_crypt(alphabet, e)))
+res = "".join(en_de_crypt(en_de_crypt(alphabet, e), d))
 print(res)
 
 check_txt(alphabet, res)
 
 alphabet = "12022005"
 print(alphabet)
-print(" ".join(encrypt(alphabet)))
-res = "".join(decrypt(encrypt(alphabet)))
+print(" ".join(en_de_crypt(alphabet, e)))
+res = "".join(en_de_crypt(en_de_crypt(alphabet, e), d))
 print(res)
 
 check_txt(alphabet, res)

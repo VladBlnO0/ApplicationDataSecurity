@@ -17,7 +17,7 @@ def rnd():
     return t
 
 # === ENCODING/DECODING ===
-def en_de_crypt(fin, fout, mode):
+def en_de_crypt(fin, fout):
     rnd_init()
     with open(fin, "rb") as fin:
         with open(fout, "wb") as fout:
@@ -28,13 +28,10 @@ def en_de_crypt(fin, fout, mode):
                 gamma = rnd()
                 arr = []
                 for i in range(len(data)):
-                    if mode == "enc":
-                        arr.append((data[i] + gamma[i]) % 256)
-                    elif mode == "dec":
-                        arr.append((data[i] - gamma[i]) % 256)
+                    arr.append(data[i] ^ gamma[i])
                 fout.write(bytes(arr))
 
-en_de_crypt("Source.txt", "Coded.txt", mode="enc")
-en_de_crypt("Coded.txt", "DeCoded.txt", mode="dec")
+en_de_crypt("Source.txt", "Coded.txt")
+en_de_crypt("Coded.txt", "DeCoded.txt")
 
-print("Encryption and decryption complete.")
+print("Encryption and decryption complete")
